@@ -215,7 +215,7 @@ uint32_t oled_power(uint8_t base, uint8_t exponent)
  *************************************************************************/
 void oled_show_number(uint8_t x, uint8_t y, uint32_t num, uint8_t len)
 {           
-  u8 digit, temp;
+  u8 temp;
   for(u8 i = 0; i < len; i++)
   {
     temp = (num / oled_power(10, len - i - 1)) % 10;
@@ -426,78 +426,78 @@ void setup()
 void loop()                     
 {
   // Display Balance PD control P parameter on the first line
-  oled.drawstring(0, 0, "B-KP:");
+  oled.drawstring(0, 0, (char*)"B-KP:");
   oled_show_number(30, 0, balance_kp, 3);
-  oled.drawstring(85, 0, "A:");
+  oled.drawstring(85, 0, (char*)"A:");
   oled_show_number(100, 0, amplitude1, 3);
 
   // Display Balance PD control D parameter on the second line
-  oled.drawstring(0, 1, "B-KD:");
+  oled.drawstring(0, 1, (char*)"B-KD:");
   oled_show_number(30, 1, balance_kd, 3);
-  oled.drawstring(85, 1, "A:");
+  oled.drawstring(85, 1, (char*)"A:");
   oled_show_number(100, 1, amplitude2, 3);
 
   // Display Position PD control P parameter on the third line
-  oled.drawstring(0, 2, "P-KP:");
+  oled.drawstring(0, 2, (char*)"P-KP:");
   oled_show_number(30, 2, position_kp, 3);
-  oled.drawstring(85, 2, "A:");
+  oled.drawstring(85, 2, (char*)"A:");
   oled_show_number(100, 2, amplitude3, 3);
 
   // Display Position PD control D parameter on the fourth line
-  oled.drawstring(0, 3, "P-KD:");
+  oled.drawstring(0, 3, (char*)"P-KD:");
   oled_show_number(30, 3, position_kd, 3);
-  oled.drawstring(85, 3, "A:");
+  oled.drawstring(85, 3, (char*)"A:");
   oled_show_number(100, 3, amplitude4, 3);
 
   // Scrolling menu to select the PD parameter to adjust                      
   if(menu_option == 1)
   {
-    oled.drawstring(65, 0, "Y");
-    oled.drawstring(65, 1, "N");
-    oled.drawstring(65, 2, "N");
-    oled.drawstring(65, 3, "N");
+    oled.drawstring(65, 0, (char*)"Y");
+    oled.drawstring(65, 1, (char*)"N");
+    oled.drawstring(65, 2, (char*)"N");
+    oled.drawstring(65, 3, (char*)"N");
   }
   else if(menu_option == 2)
   {
-    oled.drawstring(65, 0, "N");
-    oled.drawstring(65, 1, "Y");
-    oled.drawstring(65, 2, "N");
-    oled.drawstring(65, 3, "N");
+    oled.drawstring(65, 0, (char*)"N");
+    oled.drawstring(65, 1, (char*)"Y");
+    oled.drawstring(65, 2, (char*)"N");
+    oled.drawstring(65, 3, (char*)"N");
   }   
   else if(menu_option == 3)
   {     
-    oled.drawstring(65, 0, "N");
-    oled.drawstring(65, 1, "N");
-    oled.drawstring(65, 2, "Y");
-    oled.drawstring(65, 3, "N");
+    oled.drawstring(65, 0, (char*)"N");
+    oled.drawstring(65, 1, (char*)"N");
+    oled.drawstring(65, 2, (char*)"Y");
+    oled.drawstring(65, 3, (char*)"N");
   }   
   else if(menu_option == 4)
   {       
-    oled.drawstring(65, 0, "N");
-    oled.drawstring(65, 1, "N");
-    oled.drawstring(65, 2, "N");
-    oled.drawstring(65, 3, "Y");
+    oled.drawstring(65, 0, (char*)"N");
+    oled.drawstring(65, 1, (char*)"N");
+    oled.drawstring(65, 2, (char*)"N");
+    oled.drawstring(65, 3, (char*)"Y");
   } 
 
   // Display voltage on the fifth line      
-  oled.drawstring(0, 4, "VOLTAGE:");
-  oled.drawstring(71, 4, ".");
-  oled.drawstring(93, 4, "V");
+  oled.drawstring(0, 4, (char*)"VOLTAGE:");
+  oled.drawstring(71, 4, (char*)".");
+  oled.drawstring(93, 4, (char*)"V");
   oled_show_number(58, 4, battery_voltage / 100, 2);
   oled_show_number(81, 4, battery_voltage % 100, 2);
 
   // Display encoder data on the sixth line
-  oled.drawstring(0, 5, "POSITION:");
+  oled.drawstring(0, 5, (char*)"POSITION:");
   oled_show_number(60, 5, position_value, 5);
 
   // Display position target value on the seventh line
-  oled.drawstring(0, 6, "TARGET:");
+  oled.drawstring(0, 6, (char*)"TARGET:");
   oled_show_number(60, 6, target_position, 5);
 
   // Display angle displacement sensor value and origin on the eighth line
-  oled.drawstring(0, 7, "ADC:");
+  oled.drawstring(0, 7, (char*)"ADC:");
   oled_show_number(25, 7, sensor_value, 4);  
-  oled.drawstring(55, 7, "ORIGIN:");  // This value is the pendulum arm value when naturally hanging down
+  oled.drawstring(55, 7, (char*)"ORIGIN:");  // This value is the pendulum arm value when naturally hanging down
   oled_show_number(100, 7, 240, 3);
 
   // Refresh the display
@@ -506,4 +506,3 @@ void loop()
   // Send data to the PC-side software
   send_data_scope();
 }
-
